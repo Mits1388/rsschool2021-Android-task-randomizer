@@ -1,5 +1,6 @@
 package com.rsschool.android2021
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
-class SecondFragment : Fragment() {
+
+
+class SecondFragment : Fragment(), BackPressedForFragments{
 
     private var backButton: Button? = null
     private var result: TextView? = null
+    private var randomValue: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,20 +31,31 @@ class SecondFragment : Fragment() {
         result = view.findViewById(R.id.result)
         backButton = view.findViewById(R.id.back)
 
-        val min = arguments?.getInt(MIN_VALUE_KEY) ?: 0
-        val max = arguments?.getInt(MAX_VALUE_KEY) ?: 0
+         val min = arguments?.getInt(MIN_VALUE_KEY) ?: 0
+         val max = arguments?.getInt(MAX_VALUE_KEY) ?: 0
 
-        result?.text = generate(min, max).toString()
+         result?.text = generate(min, max).toString()
+         randomValue = result?.text.toString().toInt()
 
         backButton?.setOnClickListener {
             // TODO: implement back
+            val firstFragment = FirstFragment.newInstance(randomValue)
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.container, firstFragment)
+            transaction.commit()
         }
     }
 
     private fun generate(min: Int, max: Int): Int {
-        // TODO: generate random number
-        return 0
+
+        val randomValueMinMAx = (min..max).random()
+        return randomValueMinMAx
     }
+
+
+
+
+
 
     companion object {
 
@@ -49,6 +65,9 @@ class SecondFragment : Fragment() {
             val args = Bundle()
 
             // TODO: implement adding arguments
+            args.putInt(MIN_VALUE_KEY, min)
+            args.putInt(MAX_VALUE_KEY, max)
+            fragment.arguments = args
 
             return fragment
         }
@@ -56,4 +75,15 @@ class SecondFragment : Fragment() {
         private const val MIN_VALUE_KEY = "MIN_VALUE"
         private const val MAX_VALUE_KEY = "MAX_VALUE"
     }
+
+
+
+
+    override fun onBackPressed() {
+        val firstFragment = FirstFragment.newInstance(randomValue)
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, firstFragment)
+        transaction.commit()
+    }
+
 }

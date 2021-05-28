@@ -1,17 +1,22 @@
 package com.rsschool.android2021
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+
 
 class FirstFragment : Fragment() {
 
     private var generateButton: Button? = null
     private var previousResult: TextView? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,6 +25,8 @@ class FirstFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,11 +38,32 @@ class FirstFragment : Fragment() {
 
         // TODO: val min = ...
         // TODO: val max = ...
+        val min: EditText? = view.findViewById(R.id.min_value)
+        val max: EditText? = view.findViewById(R.id.max_value)
+
+
 
         generateButton?.setOnClickListener {
+
             // TODO: send min and max to the SecondFragment
+            if(min?.getText().toString().equals("") || max?.getText().toString().equals("") ){
+                Toast.makeText(activity,"invalid data",Toast.LENGTH_SHORT).show()
+            }else {
+                val maxInt = max?.text.toString().toInt()
+                val minInt = min?.text.toString().toInt()
+
+                if(maxInt <= minInt) {
+                    Toast.makeText(activity, "invalid data", Toast.LENGTH_LONG).show()
+                }else {
+                    val secondFragment = SecondFragment.newInstance(minInt, maxInt)
+                    val transaction = parentFragmentManager.beginTransaction()
+                    transaction.replace(R.id.container, secondFragment)
+                    transaction.commit()
+                }
+            }
         }
     }
+
 
     companion object {
 
