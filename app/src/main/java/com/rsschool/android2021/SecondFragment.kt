@@ -49,8 +49,8 @@ class SecondFragment : Fragment(), BackPressedForFragments{
 
 
     private fun generate(min: Int, max: Int): Int {
-        val randomValueMinMAx = (min..max).random()
-        return randomValueMinMAx
+        val randomValueMinMax = (min..max).random()
+        return randomValueMinMax
     }
 
 

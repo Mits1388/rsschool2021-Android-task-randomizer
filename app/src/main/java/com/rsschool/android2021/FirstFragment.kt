@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 
 
@@ -44,13 +45,18 @@ class FirstFragment : Fragment() {
 
             // TODO: send min and max to the SecondFragment
             if(min?.getText().toString().equals("") || max?.getText().toString().equals("") ){
-                Toast.makeText(activity,"invalid data",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,"Invalid data",Toast.LENGTH_SHORT).show()
             }else {
                 val maxInt = max?.text.toString().toInt()
                 val minInt = min?.text.toString().toInt()
 
                 if(maxInt <= minInt) {
-                    Toast.makeText(activity, "invalid data", Toast.LENGTH_LONG).show()
+
+                    /*val dialogBuilder = activity?.let { it1 -> AlertDialog.Builder(it1) }
+                    val alert = dialogBuilder?.create()
+                    alert?.setTitle("Invalid Data")
+                    alert?.show()*/
+                        Toast.makeText(activity, "Invalid data", Toast.LENGTH_LONG).show()
                 }else {
                     val secondFragment = SecondFragment.newInstance(minInt, maxInt)
                     val transaction = parentFragmentManager.beginTransaction()

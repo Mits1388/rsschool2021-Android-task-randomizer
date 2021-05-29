@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity implements BackPressedForFragments {
+public class MainActivity extends AppCompatActivity implements BackPressedForFragments, Fragments {
 
 
     @Override
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements BackPressedForFra
         openFirstFragment(0);
     }
 
-
+/*
     private void openFirstFragment(int previousNumber) {
         final Fragment firstFragment = FirstFragment.newInstance(previousNumber);
         final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements BackPressedForFra
         transaction.replace(R.id.container, secondFragment);
         transaction.commit();
     }
-
+*/
 
     @Override
     public void onBackPressed() {
@@ -53,5 +53,22 @@ public class MainActivity extends AppCompatActivity implements BackPressedForFra
         }else {
            super.onBackPressed();
        }
+    }
+
+
+    @Override
+    public void openFirstFragment(int previousNumber) {
+        final Fragment firstFragment = FirstFragment.newInstance(previousNumber);
+        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, firstFragment);
+        transaction.commit();
+    }
+
+    @Override
+    public void openSecondFragment(int min, int max) {
+        final Fragment secondFragment = SecondFragment.newInstance(min, max);
+        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, secondFragment);
+        transaction.commit();
     }
 }
