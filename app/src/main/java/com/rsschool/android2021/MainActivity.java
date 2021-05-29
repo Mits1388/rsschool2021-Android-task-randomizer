@@ -10,12 +10,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity implements BackPressedForFragments {
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         openFirstFragment(0);
     }
+
 
     private void openFirstFragment(int previousNumber) {
         final Fragment firstFragment = FirstFragment.newInstance(previousNumber);
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements BackPressedForFra
         // TODO: invoke function which apply changes of the transaction
         transaction.commit();
     }
+
 
     private void openSecondFragment(int min, int max) {
         // TODO: implement it

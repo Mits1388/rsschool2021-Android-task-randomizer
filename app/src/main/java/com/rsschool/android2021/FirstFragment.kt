@@ -27,7 +27,6 @@ class FirstFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         previousResult = view.findViewById(R.id.previous_result)
@@ -40,8 +39,6 @@ class FirstFragment : Fragment() {
         // TODO: val max = ...
         val min: EditText? = view.findViewById(R.id.min_value)
         val max: EditText? = view.findViewById(R.id.max_value)
-
-
 
         generateButton?.setOnClickListener {
 

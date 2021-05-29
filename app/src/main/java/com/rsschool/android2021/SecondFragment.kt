@@ -26,6 +26,7 @@ class SecondFragment : Fragment(), BackPressedForFragments{
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         result = view.findViewById(R.id.result)
@@ -46,15 +47,11 @@ class SecondFragment : Fragment(), BackPressedForFragments{
         }
     }
 
-    private fun generate(min: Int, max: Int): Int {
 
+    private fun generate(min: Int, max: Int): Int {
         val randomValueMinMAx = (min..max).random()
         return randomValueMinMAx
     }
-
-
-
-
 
 
     companion object {
@@ -63,7 +60,6 @@ class SecondFragment : Fragment(), BackPressedForFragments{
         fun newInstance(min: Int, max: Int): SecondFragment {
             val fragment = SecondFragment()
             val args = Bundle()
-
             // TODO: implement adding arguments
             args.putInt(MIN_VALUE_KEY, min)
             args.putInt(MAX_VALUE_KEY, max)
@@ -71,12 +67,9 @@ class SecondFragment : Fragment(), BackPressedForFragments{
 
             return fragment
         }
-
         private const val MIN_VALUE_KEY = "MIN_VALUE"
         private const val MAX_VALUE_KEY = "MAX_VALUE"
     }
-
-
 
 
     override fun onBackPressed() {
